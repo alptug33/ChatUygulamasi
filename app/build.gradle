@@ -1,0 +1,165 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'androidx.room'
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
+android {
+    namespace 'com.alp2app.chatuygulamasi'
+    compileSdk 34
+    
+    defaultConfig {
+        applicationId "com.alp2app.chatuygulamasi"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+        
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                    "room.incremental": "true"
+                ]
+            }
+        }
+        
+        multiDexEnabled true
+        
+        manifestPlaceholders = [
+            crashlyticsEnabled: false,
+            crashlyticsCollectionEnabled: false,
+            'com.google.firebase.database.connection_pool_size': '5',
+            'com.google.firebase.database.persistence_enabled': 'true'
+        ]
+        
+        buildConfigField "boolean", "ENABLE_DEBUG", "false"
+        buildConfigField "boolean", "ENABLE_CRASH_REPORTING", "false"
+    }
+    
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            manifestPlaceholders = [
+                crashlyticsEnabled: false,
+                crashlyticsCollectionEnabled: false
+            ]
+        }
+        
+        debug {
+            debuggable true
+            manifestPlaceholders = [
+                crashlyticsEnabled: false,
+                crashlyticsCollectionEnabled: false
+            ]
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_19
+        targetCompatibility JavaVersion.VERSION_19
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    packaging {
+        resources {
+            excludes += [
+                'META-INF/LICENSE.md',
+                'META-INF/LICENSE-notice.md',
+                'META-INF/DEPENDENCIES'
+            ]
+        }
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+        disable 'DeprecatedLibrary', 'ObsoleteLintCustomCheck', 'DeprecatedApi'
+    }
+}
+
+dependencies {
+    // Remove duplicate annotations by excluding the older version
+    implementation('com.intellij:annotations:12.0') {
+        exclude group: 'org.jetbrains', module: 'annotations'
+    }
+    
+    // Or alternatively, force a specific version for all dependencies
+    configurations.all {
+        resolutionStrategy {
+            force 'org.jetbrains:annotations:23.0.0'
+        }
+    }
+    
+    // Exclude all JetBrains annotations
+    configurations {
+        all*.exclude group: 'org.jetbrains', module: 'annotations'
+    }
+    
+    // Core Android dependencies
+    implementation 'androidx.core:core:1.12.0'
+    implementation 'androidx.annotation:annotation:1.7.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.activity:activity:1.8.2'
+    implementation 'androidx.fragment:fragment:1.6.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    
+    // Room dependencies
+    def room_version = "2.6.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.7.0'
+    
+    // Glide for image loading
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+    
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:32.7.3')
+    
+    // Firebase dependencies (without versions)
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-database-ktx'
+    
+    // Android Test dependencies
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation 'androidx.test:runner:1.6.1'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    
+    // Unit Test dependencies
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.1'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.1'
+    
+    // Your other dependencies...
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.activity:activity-ktx:1.8.2'
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+    
+    // CircleImageView for round profile images
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+}
+
+apply plugin: 'com.google.gms.google-services' 

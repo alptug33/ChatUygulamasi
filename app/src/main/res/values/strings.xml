@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ChatUygulamasi</string>
+    <string name="profile_image_hint">Profil fotoğrafını değiştirmek için tıklayın</string>
+</resources>

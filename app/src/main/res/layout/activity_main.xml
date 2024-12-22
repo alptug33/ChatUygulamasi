@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/messagesRecyclerView"
+        android:layout_above="@+id/bottomLayout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomLayout"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="8dp" >
+
+       <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/attachbutton"
+        />
+
+        <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/messageInput"
+        android:hint="Mesaj yazın..."
+        android:padding="8dp"
+        android:layout_weight="1" />
+
+        <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/sendButton" />
+    </LinearLayout>
+
+</RelativeLayout>
+

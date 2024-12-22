@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "128345086437",
+    "project_id": "chatapp-7207a",
+    "storage_bucket": "chatapp-7207a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128345086437:android:96afde2ad6da48abd5f70c",
+        "android_client_info": {
+          "package_name": "com.alp2app.chatuygulamasi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5ZMLP5P-2teIn57etZP5CicTUFRghVgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
